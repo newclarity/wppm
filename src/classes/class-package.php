@@ -4,7 +4,6 @@ class WPPM_Package extends WPPM_Container {
 
   var $CONTAINED_TYPES = array(
     'author'       => 'WPPM_Contributor',
-    'wordpress'    => 'WPPM_WordPress',
     'repository'   => 'WPPM_Repository',
     'contributors' => 'WPPM_Contributor',
     'dependencies' => 'WPPM_Repository',
@@ -15,13 +14,14 @@ class WPPM_Package extends WPPM_Container {
   var $version;
   var $type;
   var $license;
-  var $wordpress;
+  var $requires;
+  var $tested;
   var $author;
   var $contributors = array();
   var $tags;
   var $repository;
   var $dependencies = array();
-  var $bundledDependencies = array();
+  var $bundled_dependencies = array();
 
   protected function _fixup() {
     if ( is_null( $this->slug ) )
@@ -29,14 +29,19 @@ class WPPM_Package extends WPPM_Container {
 
     parent::_fixup();
 
-    $bundledDependencies = array();
-    foreach ( $this->bundledDependencies as $dependency_id ) {
-      if ( isset($this->dependencies[$dependency_id]) ) {
-        $bundledDependencies[$dependency_id] = $this->dependencies[$dependency_id];
+    if ( 0 == count( $this->bundled_dependencies ) ) {
+      if ( count( $this->dependencies ) ) {
+        $this->bundled_dependencies = $this->dependencies;
       }
+    } else {
+      $bundled_dependencies = array();
+      foreach ( $this->bundled_dependencies as $dependency_id ) {
+        if ( isset($this->dependencies[$dependency_id]) ) {
+          $bundled_dependencies[$dependency_id] = $this->dependencies[$dependency_id];
+        }
+      }
+      $this->bundled_dependencies = $bundled_dependencies;
     }
-    $this->bundledDependencies = $bundledDependencies;
-
   }
 
 }
