@@ -1,0 +1,12 @@
+{
+  "executables" : {
+    "git" : "/usr/bin/git",
+    "svn" : "/usr/bin/svn",
+    "hg"  : "/usr/local/bin/hg"
+  },
+  "hosts": {
+    "github.com"    : { "username": "thezuckster",  "password": "rul3th3world" },
+    "bitbucket.org" : { "username": "thezuckster",  "password": "ru1ethew0rld" },
+    "wordpress.org" : { "username": "Facebook",     "password": "ru13th3w0rld" }
+  }
+}

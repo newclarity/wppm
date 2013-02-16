@@ -1,9 +1,9 @@
 <?php
 
-class WPPM_Package_Base {
+abstract class WPPM_Container {
 
   var $id;
-  var $package;
+  var $ROOT;
   var $CONTAINED_TYPES;
 
   /**
@@ -11,9 +11,9 @@ class WPPM_Package_Base {
    * @param bool|object|mixed $vars
    * @param WPPM_Package
    */
-  function __construct( $id, $vars, $package ) {
-      $this->id = $id;
-    $this->package = $package;
+  function __construct( $id, $vars, $root ) {
+    $this->id = $id;
+    $this->ROOT = $root;
     if ( is_object( $vars ) )
       $vars = (array) $vars;
     if ( is_array( $vars ) )
@@ -52,7 +52,7 @@ class WPPM_Package_Base {
   }
 
   private function _convert($property, $value, $class_name ) {
-    return new $class_name( $property, $value, $this->package );
+    return new $class_name( $property, $value, $this->ROOT );
   }
 
   private function _convert_to_array( $property, $json_object ) {
@@ -72,7 +72,7 @@ class WPPM_Package_Base {
   }
   protected function _fixup() {
     foreach ( get_object_vars( $this ) as $name => $value ) {
-      if ( preg_match( '#^(package|CONTAINED_TYPES)$#', $name ) ) {
+      if ( preg_match( '#^(ROOT|CONTAINED_TYPES)$#', $name ) ) {
         continue;
       } else if ( is_object( $value ) ) {
         if ( method_exists( $value, '_fixup' ) ) {

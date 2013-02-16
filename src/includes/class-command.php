@@ -1,6 +1,6 @@
 <?php
 
-class WPPM_Command_Base {
+abstract class WPPM_Command {
   var $command;
   function __construct() {
   }

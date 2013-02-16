@@ -1,6 +1,6 @@
 <?php
 
-class WPPM_Contributor extends WPPM_Package_Base {
+class WPPM_Contributor extends WPPM_Container {
 
   var $CONTAINED_TYPES = array(
     'links' => 'WPPM_Link',

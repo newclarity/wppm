@@ -1,6 +1,6 @@
 <?php
 
-class WPPM_Package extends WPPM_Package_Base {
+class WPPM_Package extends WPPM_Container {
 
   var $CONTAINED_TYPES = array(
     'author'       => 'WPPM_Contributor',
@@ -54,7 +54,7 @@ class WPPM_Package extends WPPM_Package_Base {
    */
   private function _strip_CONTAINED_TYPES( $object ) {
     foreach ( get_object_vars( $object ) as $name => $value ) {
-      if ( 'package' == $name ) {
+      if ( 'ROOT' == $name ) {
         continue;
       } else if ( 'CONTAINED_TYPES' == $name ) {
         unset( $object->CONTAINED_TYPES );

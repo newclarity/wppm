@@ -1,16 +1,16 @@
 <?php
 
-class WPPM_Link extends WPPM_Package_Base {
+class WPPM_Link extends WPPM_Container {
 
   var $type;
   var $url;
 
-  function __construct(  $type, $value, $package ) {
+  function __construct( $type, $value, $package ) {
     if ( is_object( $value ) ) {
       parent::__construct( $value, $type, $package );
     } else {
       $this->id   = $value;
-      $this->package = $package;
+      $this->ROOT = $package;
       $this->type = $type;
       if ( preg_match( '#^https?://#', $value ) ) {
         $this->url = $value;

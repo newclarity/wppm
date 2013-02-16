@@ -3,6 +3,7 @@
 class WP_Packager_Manager {
   static $VALID_COMMANDS = array(
     'help'    => 'WPPM_Help_Command',
+    'show'    => 'WPPM_Show_Command',
     'prep'    => 'WPPM_Prep_Command',
     'status'  => 'WPPM_Status_Command',
   );
@@ -20,7 +21,7 @@ class WP_Packager_Manager {
 
   /**
    * @param string $command
-   * @return WPPM_Command_Base
+   * @return WPPM_Command
    */
   static function get_command( $command ) {
     if ( ! self::has_command( $command ) )

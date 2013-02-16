@@ -1,6 +1,6 @@
 <?php
 
-class WPPM_WordPress extends WPPM_Package_Base {
+class WPPM_WordPress extends WPPM_Container {
 
   var $requires;
   var $testedWith;

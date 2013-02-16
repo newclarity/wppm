@@ -1,6 +1,11 @@
 <?php
 
+/**
+ * Load Root and Base Classes. We'll always need them.
+ */
 require ( __DIR__ . "/wp-package-manager.php" );
+require ( __DIR__ . "/class-container.php" );
+require ( __DIR__ . "/class-command.php" );
 /**
  * Autoloads classes from the /classes subdirectory.
  *

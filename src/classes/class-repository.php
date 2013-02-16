@@ -1,6 +1,6 @@
 <?php
 
-class WPPM_Repository extends WPPM_Package_Base {
+class WPPM_Repository extends WPPM_Container {
 
   var $vcs;
   var $source;
@@ -50,7 +50,7 @@ class WPPM_Repository extends WPPM_Package_Base {
   protected function _fixup() {
     parent::_fixup();
     if ( is_null( $this->type ) )
-      switch ( $this->package->type ) {
+      switch ( $this->ROOT->type ) {
         case 'plugin':
           $this->type = 'library';
           break;
