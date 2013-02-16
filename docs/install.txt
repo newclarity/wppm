@@ -1,0 +1,5 @@
+
+Configuring on a Mac OS X
+
+  ln -s ~/Tools/wppm/src/wppm.php /usr/local/bin/wppm
+  chmod +x /usr/local/bin/wppm
