@@ -5,6 +5,7 @@ abstract class WPPM_Container {
   var $id;
   var $ROOT;
   var $CONTAINED_TYPES;
+  var $unused;
 
   /**
    * @param string $id
@@ -35,16 +36,8 @@ abstract class WPPM_Container {
             unset( $vars[$name] );
           }
         }
-        if ( count( $vars ) ) {
-          echo "WARNING: These property/values were not recognized inside JSON container [{$id}]:\n";
-          foreach ( $vars as $name => $value ) {
-            if ( is_object( $value ) )
-              $value = "**(object)**";
-            else if ( is_array( $value ) )
-              $value = "**(array)**";
-            echo "\n\t{$name}: {$value}\n";
-          }
-        }
+        if ( count( $vars ) )
+          $this->unused = $vars;
       }
     }
     if ( $this === $this->ROOT ) {
