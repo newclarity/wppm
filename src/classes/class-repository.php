@@ -5,7 +5,6 @@ class WPPM_Repository extends WPPM_Container {
   var $vcs;
   var $source;
   var $domain;
-  var $host;
   var $version = '*';
   var $type;
   var $account;
@@ -32,15 +31,12 @@ class WPPM_Repository extends WPPM_Container {
 
     switch ( $this->domain ) {
       case 'github.com':
-        $this->host = 'github';
         $this->vcs = 'git';
         break;
       case 'bitbucket.org':
-        $this->host = 'bitbucket';
         $this->vcs = is_null( $this->vcs ) ? 'hg' : $this->vcs;
         break;
       case 'wordpress.org':
-        $this->host = 'wordpress';
         $this->vcs = 'svn';
         break;
     }

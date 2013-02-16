@@ -2,8 +2,9 @@
 
 class WPPM_Config extends WPPM_Container {
   var $CONTAINED_TYPES = array(
-    'hosts' => 'WPPM_Host',
+    'executables' => 'WPPM_Executable',
+    'hosts'       => 'WPPM_Host',
   );
-  var $executables = array();
   var $hosts = array();
+  var $executables = array();
 }

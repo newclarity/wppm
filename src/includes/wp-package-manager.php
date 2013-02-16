@@ -32,6 +32,7 @@ class WP_Packager_Manager {
     $command = new $command_class;
     return $command;
   }
+
   /**
    * @param bool|string $package_file
    *
@@ -41,18 +42,43 @@ class WP_Packager_Manager {
     if ( ! $package_file )
       $package_file = getcwd() . "/wp-package.json";
 
-    if ( ! is_file( $package_file ) ) {
-      self::fail( "The package file does not exist: {$package_file}" );
+    return self::_parse_json( $package_file, 'package', 'WPPM_Package' );
+  }
+
+  /**
+   * @param bool|string $config_file
+   *
+   * @return WPPM_config
+   */
+  static function parse_config( $config_file = false ) {
+    if ( ! $config_file )
+      $config_file = "{$_SERVER['HOME']}/.wppm/config.json";
+
+    return self::_parse_json( $config_file, 'config', 'WPPM_Config' );
+  }
+
+  /**
+   * @param string $json_file
+   * @param string $file_type
+   * @param string $class_name
+   *
+   * @return WPPM_Container
+   */
+  private static function _parse_json( $json_file, $file_type, $class_name ) {
+
+    if ( ! is_file( $json_file ) ) {
+      self::fail( "The {$$file_type} file does not exist: {$json_file}" );
       exit;
     }
 
-    $json_package = file_get_contents( $package_file );
+    $json_object = file_get_contents( $json_file );
 
-    $json_package = json_decode( $json_package );
+    $json_object = json_decode( $json_object );
 
-    $package = new WPPM_Package( $package_file, $json_package );
+    $object = new $class_name( $json_file, $json_object );
 
-    return $package;
+    return $object;
+
   }
 
   /**
@@ -115,6 +141,7 @@ USAGE;
  			self::$switches[] = trim( $switch );
  		}
  	}
+
 }
 
 
