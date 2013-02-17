@@ -15,7 +15,10 @@ abstract class WPPM_Command {
     WP_Packager_Manager::fail( $message );
   }
   function add_error( $error ) {
-    $this->errors[] = "ERROR: {$error}";
+    $this->errors[] = "\tERROR: {$error}\n";
+  }
+  function add_notice( $notice ) {
+    $this->messages[] = "\tNOTICE: {$notice}\n";
   }
   function add_message( $message ) {
     $this->messages[] = $message;
