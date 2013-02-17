@@ -3,7 +3,7 @@
 class WPPM_Repository extends WPPM_Container {
 
   var $vcs;
-  var $source;
+  var $url;
   var $domain;
   var $version = '*';
   var $type;
@@ -11,10 +11,8 @@ class WPPM_Repository extends WPPM_Container {
   var $repository;
   function __construct( $id, $value, $package = false ) {
     parent::__construct( $id, $value, $package );
-    if ( ! preg_match( '#^https?://#', $this->source ) )
-      $this->source = "http://{$this->source}";
-    $source = preg_replace( '#^https?://(.*)#', '$1', $this->source );
-    $parts = explode( '/', $source );
+    $this->id = preg_replace( '#^https?://(.*)#', '$1', $this->url );
+    $parts = explode( '/', $this->id );
 
     $this->domain = $parts[0];
 
@@ -41,6 +39,7 @@ class WPPM_Repository extends WPPM_Container {
         break;
     }
 
+    $this->id = "{$this->domain}/{$this->account}/{$this->repository}";
 
   }
   protected function _fixup() {
