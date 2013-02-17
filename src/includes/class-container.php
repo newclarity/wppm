@@ -2,9 +2,24 @@
 
 abstract class WPPM_Container {
 
+  /**
+   * @var string
+   */
   var $id;
+
+  /**
+   * @var bool|WPPM_Container
+   */
   var $ROOT;
+
+  /**
+   * @var array
+   */
   var $CONTAINED_TYPES;
+
+  /**
+   * @var array
+   */
   var $unused;
 
   /**
