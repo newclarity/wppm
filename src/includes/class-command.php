@@ -7,12 +7,12 @@ abstract class WPPM_Command {
   function __construct() {
   }
   function get_command_name() {
-    $commands = array_flip( WP_Packager_Manager::$VALID_COMMANDS );
+    $commands = array_flip( WP_Package_Manager::$VALID_COMMANDS );
     return $commands[get_class( $this )];
   }
   function execute() {
     $message = sprintf( 'The %s class has not implemented an execute() method.', get_class( $this ) );
-    WP_Packager_Manager::fail( $message );
+    WP_Package_Manager::fail( $message );
   }
   function add_error( $error ) {
     $this->errors[] = "\tERROR: {$error}\n";
