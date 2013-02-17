@@ -14,7 +14,6 @@
   "author_homepage": "http://lexity.com",
   "alternate_author": {
     "#comment": "To use this rename to 'author' vs. 'alternate_author' and use in place of 'author' and 'author_homepage'",
-    "id": "Lexity",
     "name": "Lexity",
     "email": "support@lexity.com",
     "homepage": "website",
