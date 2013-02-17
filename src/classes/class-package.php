@@ -5,6 +5,7 @@ class WPPM_Package extends WPPM_Container {
   var $CONTAINED_TYPES = array(
     'author'       => 'WPPM_Contributor',
     'source'       => 'WPPM_Repository',
+    'license'      => 'WPPM_License',
     'contributors' => 'WPPM_Contributor',
     'dependencies' => 'WPPM_Repository',
   );
@@ -12,26 +13,45 @@ class WPPM_Package extends WPPM_Container {
   var $slug;
   var $description;
   var $version;
+  var $stable_tag;
   var $type;
   var $license;
-  var $requires;
-  var $tested;
+  var $copyright;
+  var $requires_wp;
+  var $tested_with;
+  var $requires_php;
   var $author;
   var $contributors = array();
   var $tags;
   var $source;
   var $dependencies = array();
   var $bundled_dependencies = array();
+  var $url;
 
   var $singular_type_name;
   var $plural_type_name;
 
 
-  function __construct( $id, $value ) {
-    parent::__construct( $id, $value );
+  function __construct( $package_filepath, $package ) {
+    $this->FILEPATH = $package_filepath;
+
+    if ( isset( $package->requires ) && ! isset( $package->requires_wp ) ) {
+      $package->requires_wp = $package->requires;
+      unset( $package->requires );
+    }
+
+    if ( isset( $package->tested ) && ! isset( $package->tested_with ) ) {
+      $package->tested_with = $package->tested;
+      unset( $package->tested );
+    }
+
+    parent::__construct( 'package', (array)$package );
 
     if ( is_null( $this->type ) )
       $this->type = 'plugin';
+
+    if ( is_null( $this->stable_tag ) )
+      $this->stable_tag = $this->version;
 
     switch ( $this->type ) {
       case 'plugin':
