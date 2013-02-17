@@ -15,6 +15,11 @@ abstract class WPPM_Container {
   var $ID;
 
   /**
+   * @var string
+   */
+  var $FILEPATH;
+
+  /**
    * @var bool|WPPM_Container
    */
   var $ROOT;
