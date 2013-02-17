@@ -2,7 +2,7 @@
 <?php
 
 require( __DIR__ . '/includes/wppm-loader.php' );
-WP_Packager_Manager::execute();
+WP_Package_Manager::execute();
 
 
 

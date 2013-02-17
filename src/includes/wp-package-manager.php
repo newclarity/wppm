@@ -1,6 +1,6 @@
 <?php
 
-class WP_Packager_Manager {
+class WP_Package_Manager {
   static $VALID_COMMANDS = array(
     'help'    => 'WPPM_Help_Command',
     'show'    => 'WPPM_Show_Command',
