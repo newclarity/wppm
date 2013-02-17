@@ -1,4 +1,4 @@
 wppm
 ====
 
-WordPress Package Manager - Command line look for managing plugins and themes
+WordPress Package Manager - Command line tool for managing plugins and themes for WordPress
