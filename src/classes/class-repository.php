@@ -11,8 +11,8 @@ class WPPM_Repository extends WPPM_Container {
   var $repository;
   function __construct( $id, $value, $package = false ) {
     parent::__construct( $id, $value, $package );
-    $this->id = preg_replace( '#^https?://(.*)#', '$1', $this->url );
-    $parts = explode( '/', $this->id );
+    $this->ID = preg_replace( '#^https?://(.*)#', '$1', $this->url );
+    $parts = explode( '/', $this->ID );
 
     $this->domain = $parts[0];
 
@@ -39,7 +39,7 @@ class WPPM_Repository extends WPPM_Container {
         break;
     }
 
-    $this->id = "{$this->domain}/{$this->account}/{$this->repository}";
+    $this->ID = "{$this->domain}/{$this->account}/{$this->repository}";
 
   }
   protected function _fixup() {

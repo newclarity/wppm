@@ -43,11 +43,11 @@ class WPPM_Contributor extends WPPM_Container {
     }
   }
   function _fixup() {
-    if ( 'author' == $this->id ) {
+    if ( 'author' == $this->ID ) {
 
-      if ( is_null( $this->homepage ) && isset( $this->ROOT->unused['author_homepage'] ) ) {
-        $this->homepage = $this->ROOT->unused['author_homepage'];
-        unset( $this->ROOT->unused['author_homepage'] );
+      if ( is_null( $this->homepage ) && isset( $this->ROOT->UNUSED['author_homepage'] ) ) {
+        $this->homepage = $this->ROOT->UNUSED['author_homepage'];
+        unset( $this->ROOT->UNUSED['author_homepage'] );
       }
 
       $found = false;

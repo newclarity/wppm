@@ -1,11 +1,18 @@
 <?php
-
+/**
+ * Based class for loading JSON.
+ *
+ * All base class properties UPPERCASE to avoid conflict as JSON conventions never(?) use ALL UPPERCASE.
+ *
+ * @todo Refactor out of wppm and into "Typed JSON Loader for PHP"
+ *
+ */
 abstract class WPPM_Container {
 
   /**
    * @var string
    */
-  var $id;
+  var $ID;
 
   /**
    * @var bool|WPPM_Container
@@ -20,7 +27,7 @@ abstract class WPPM_Container {
   /**
    * @var array
    */
-  var $unused;
+  var $UNUSED;
 
   /**
    * @param string $id
@@ -31,7 +38,7 @@ abstract class WPPM_Container {
   function __construct( $id, $vars, $root = false ) {
     if ( ! $root )
       $root = $this;
-    $this->id = $id;
+    $this->ID = $id;
     $this->ROOT = $root;
     if ( ! is_null( $vars ) ) {
       if ( is_object( $vars ) )
@@ -52,7 +59,7 @@ abstract class WPPM_Container {
           }
         }
         if ( count( $vars ) )
-          $this->unused = $vars;
+          $this->UNUSED = $vars;
       }
     }
     if ( $this === $this->ROOT ) {

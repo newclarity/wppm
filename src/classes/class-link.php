@@ -9,7 +9,7 @@ class WPPM_Link extends WPPM_Container {
     if ( is_object( $value ) ) {
       parent::__construct( $value, $type, $package );
     } else {
-      $this->id   = $value;
+      $this->ID   = $value;
       $this->ROOT = $package;
       $this->type = $type;
       if ( preg_match( '#^https?://#', $value ) ) {
@@ -18,23 +18,23 @@ class WPPM_Link extends WPPM_Container {
         switch ( $type ) {
           case 'github':
           case 'twitter':
-            $this->url = "http://{$type}.com/{$this->id}";
+            $this->url = "http://{$type}.com/{$this->ID}";
             break;
 
           case 'bitbucket':
-            $this->url = "http://{$type}.org/{$this->id}";
+            $this->url = "http://{$type}.org/{$this->ID}";
             break;
 
           case 'aboutme':
-            $this->url = "http://about.me/{$this->id}";
+            $this->url = "http://about.me/{$this->ID}";
             break;
 
           case 'linkedin':
-            $this->url = "http://www.linkedin.com/in/{$this->id}";
+            $this->url = "http://www.linkedin.com/in/{$this->ID}";
             break;
 
           case 'website':
-            $this->url = "http://{$this->id}";
+            $this->url = "http://{$this->ID}";
             break;
 
         }
