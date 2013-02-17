@@ -1,19 +1,20 @@
 {
+  "type": "plugin",
   "name": "Lexity Live for WP e-Commerce",
   "description": "Provides real-time customer monitoring, analytics and insight to help WP e-Commerce-based store owners increase both their traffic and their sales.",
   "version": "1.0",
-  "type": "plugin",
-  "license": "GPL",
+  "url": "http://lexity.com/apps/live",
+  "copyright": "2013 Palaran, Inc.",
   "requires": ">=3.4",
   "tested": "3.5.1",
+  "requires_php": "5.2.4",
+  "text_domain": "lexity",
   "source": {
-      "vcs": "hg",
-      "url": "bitbucket.org/newclarity/lexity-live-for-wp-e-commerce"
+    "vcs": "hg",
+    "url": "http://bitbucket.org/newclarity/lexity-live-for-wp-e-commerce"
   },
-  "author":"Lexity",
-  "author_homepage": "http://lexity.com",
-  "alternate_author": {
-    "#comment": "To use this rename to 'author' vs. 'alternate_author' and use in place of 'author' and 'author_homepage'",
+  "author": {
+    "id": "Lexity",
     "name": "Lexity",
     "email": "support@lexity.com",
     "homepage": "website",
