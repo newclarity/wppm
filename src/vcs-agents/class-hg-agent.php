@@ -63,10 +63,22 @@ class Hg_Agent extends Vcs_Agent {
   }
 
   /**
+   * Returns what Hg sees needs to be sent out.
+   *
+   * @return array
+   */
+  function out() {
+    return $this->_exec( "out" );
+  }
+
+  /**
    * @todo See if this is the best name for "Is the the repo up to date?"
    */
   function is_clean() {
-    return 0 == count( $this->status() );
+    $is_clean = 0 == count( $this->status() );
+    if ( $is_clean )
+      $is_clean = in_array( 'no changes found', $this->out() );
+    return $is_clean;
   }
 
   /**

@@ -35,6 +35,7 @@ abstract class Vcs_Agent {
     return $this->_exec( 'status' );
   }
 
+  function out() { return $this->_not_implemented( 'out' ); }
   function clean() { return $this->_not_implemented( 'clean' ); }
   function pull( $remote, $branch ) { return $this->_not_implemented( 'pull' ); }
   function update( $revision = false ) { return $this->_not_implemented( 'update' ); }
