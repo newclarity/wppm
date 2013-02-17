@@ -1,0 +1,3 @@
+[submodule "src/readme-parser"]
+	path = src/readme-parser
+	url = git://github.com/markjaquith/WordPress-Plugin-Readme-Parser.git
