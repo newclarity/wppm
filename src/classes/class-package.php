@@ -23,6 +23,34 @@ class WPPM_Package extends WPPM_Container {
   var $dependencies = array();
   var $bundled_dependencies = array();
 
+  var $singular_type_name;
+  var $plural_type_name;
+
+
+  function __construct( $id, $value ) {
+    parent::__construct( $id, $value );
+
+    if ( is_null( $this->type ) )
+      $this->type = 'plugin';
+
+    switch ( $this->type ) {
+      case 'plugin':
+        $this->singular_type_name = 'Plugin';
+        $this->plural_type_name =   'Plugins';
+        break;
+
+      case 'theme':
+        $this->singular_type_name = 'Theme';
+        $this->plural_type_name =   'Themes';
+        break;
+
+      case 'library':
+        $this->singular_type_name = 'Library';
+        $this->plural_type_name =   'Libraries';
+        break;
+
+    }
+  }
   protected function _fixup() {
     if ( is_null( $this->slug ) )
       $this->slug = strtolower( str_replace( ' ', '-', $this->name ) );

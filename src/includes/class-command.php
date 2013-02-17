@@ -12,5 +12,8 @@ abstract class WPPM_Command {
     $message = sprintf( 'The %s class has not implemented an execute() method.', get_class( $this ) );
     WP_Packager_Manager::fail( $message );
   }
+  function show( $message ) {
+    fwrite( STDOUT, "{$message}\n" );
+  }
 }
 
