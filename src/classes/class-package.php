@@ -4,7 +4,7 @@ class WPPM_Package extends WPPM_Container {
 
   var $CONTAINED_TYPES = array(
     'author'       => 'WPPM_Contributor',
-    'repository'   => 'WPPM_Repository',
+    'source'       => 'WPPM_Repository',
     'contributors' => 'WPPM_Contributor',
     'dependencies' => 'WPPM_Repository',
   );
@@ -19,7 +19,7 @@ class WPPM_Package extends WPPM_Container {
   var $author;
   var $contributors = array();
   var $tags;
-  var $repository;
+  var $source;
   var $dependencies = array();
   var $bundled_dependencies = array();
 
