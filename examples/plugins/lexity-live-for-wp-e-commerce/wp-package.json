@@ -4,32 +4,40 @@
   "version": "1.0",
   "type": "plugin",
   "license": "GPL",
-  "wordpress": {
-    "requires": ">=3.4",
-    "testedWith": "3.5.1"
+  "requires": ">=3.4",
+  "tested": "3.5.1",
+  "source": {
+      "vcs": "hg",
+      "url": "bitbucket.org/newclarity/lexity-live-for-wp-e-commerce"
   },
-  "author": {
+  "author":"Lexity",
+  "author_homepage": "http://lexity.com",
+  "alternate_author": {
+    "#comment": "To use this rename to 'author' vs. 'alternate_author' and use in place of 'author' and 'author_homepage'",
     "id": "Lexity",
     "name": "Lexity",
     "email": "support@lexity.com",
+    "homepage": "website",
     "links": {
-      "twitter": "Lxty",
-      "website": "lexity.com"
+      "website": "lexity.com",
+      "twitter": "Lxty"
     }
   },
   "contributors": {
     "NewClarity": {
       "name": "NewClarity LLC",
       "email": "info@newclarity.net",
+      "homepage": "website",
       "links": {
+        "website": "newclarity.net",
         "github": "newclarity",
-        "twitter": "newclarity",
-        "website": "newclarity.net"
+        "twitter": "newclarity"
       }
     },
     "MikeSchinkel": {
       "name": "Mike Schinkel",
       "email": "mike@newclarity.net",
+      "homepage": "aboutme",
       "links": {
         "github": "mikeschinkel",
         "twitter": "mikeschinkel",
@@ -40,6 +48,7 @@
     "tarasm": {
       "name": "Taras Mankovski",
       "email": "taras@newclarity.net",
+      "homepage": "website",
       "links": {
         "github": "taras",
         "twitter": "tarasm",
@@ -47,11 +56,6 @@
       }
     }
   },
-  "repository": {
-      "id": "lexity-live-for-wp-e-commerce",
-      "vcs": "hg",
-      "source": "bitbucket.org/newclarity/lexity-live-for-wp-e-commerce"
-    },
   "tags": [
     "analytics",
     "chat",
@@ -68,21 +72,16 @@
   ],
   "dependencies" : {
     "imperative": {
-      "source": "github.com/newclarity/imperative",
+      "url": "http://github.com/newclarity/imperative",
       "version": "*"
     },
     "restian": {
-      "source": "github.com/newclarity/restian",
+      "url": "http://github.com/newclarity/restian",
       "version": "~v0.3.1"
     },
     "sidecar": {
-      "source": "github.com/newclarity/sidecar",
+      "url": "http://github.com/newclarity/sidecar",
       "version": "~v0.4.10"
     }
-  },
-  "bundledDependencies": [
-     "imperative",
-     "restian",
-     "sidebar"
-  ]
+  }
 }
