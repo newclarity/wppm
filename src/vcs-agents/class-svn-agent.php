@@ -39,11 +39,18 @@ class Svn_Agent extends Vcs_Agent {
     return $output;
   }
 
+  function push_version( $repository_dir, $version ) {
+    $this->_pushdir( $repository_dir );
+    $output = $this->commit( $repository_dir, "Adding version {$version}" );
+    $output += $this->tag( $repository_dir, "Tagging version {$version}" );
+    $this->_popdir();
+    return $output;
+  }
+
   function tag( $repository_dir, $tag ) {
     $this->_pushdir( $repository_dir );
-    $output = $this->commit( $repository_dir, "Adding version {$tag}" );
     $output += $this->_exec( "cp trunk tags/{$tag}" );
-    $output += $this->commit( $repository_dir, "Tagging version {$tag}" );
+    $output += $this->commit( $repository_dir, $tag );
     $this->_popdir();
     return $output;
   }

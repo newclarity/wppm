@@ -40,6 +40,7 @@ abstract class Vcs_Agent {
     return $this->_exec( 'status' );
   }
 
+  function push_version( $repository_dir, $version ) { return $this->_not_implemented( 'push_version' ); }
   function remove( $repository_dir, $files, $switches ) { return $this->_not_implemented( 'remove' ); }
   function add( $repository_dir, $files, $switches ) { return $this->_not_implemented( 'add' ); }
   function tag( $repository_dir, $tag ) { return $this->_not_implemented( 'tag' ); }
