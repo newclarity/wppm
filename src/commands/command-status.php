@@ -1,25 +1,29 @@
 <?php
 class WPPM_Status_Command extends WPPM_Command {
 
-  function execute() {
+  /**
+   * @param WP_Package_Manager $wppm
+   */
+  function execute( $wppm ) {
+    $package = $wppm->parse_package();
     $status = "\n\tSTATUS\n\t------\n";
 
-    $package = WP_Package_Manager::parse_package();
+    $package = $wppm->parse_package();
 
     $status .= "\tPackage Name: {$package->name}\n";
     $status .= "\tPackage Version: {$package->version}\n";
 
     if ( ! isset( $package->source->vcs ) )
-      WP_Package_Manager::fail( "ERROR: No 'vcs' defined in the 'source' property within wp-package.json." );
+      $wppm->fail( "ERROR: No 'vcs' defined in the 'source' property within wp-package.json." );
 
-    $config = WP_Package_Manager::parse_config();
+    $config = $wppm->parse_config();
 
     $vcs = $package->source->vcs;
     if ( ! isset( $config->executables[$vcs] ) )
-      WP_Package_Manager::fail( "ERROR: No executable defined for version control system '{$vcs}' within /.wppm/config.php." );
+      $wppm->fail( "ERROR: No executable defined for version control system '{$vcs}' within /.wppm/config.php." );
 
     if ( ! is_file( $vcs_filepath = $config->executables[$vcs]->filepath ) )
-      WP_Package_Manager::fail( "ERROR: Version Control System file {$vcs_filepath} does not exist." );
+      $wppm->fail( "ERROR: Version Control System file {$vcs_filepath} does not exist." );
 
     $agent = Vcs_Interface::get_agent( $vcs, array( 'executable' => $vcs_filepath ) );
 

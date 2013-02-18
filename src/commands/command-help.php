@@ -1,6 +1,10 @@
 <?php
 class WPPM_Help_Command extends WPPM_Command {
-  function execute() {
-    WP_Package_Manager::fail( 'Help comes to those who help themselves.' );
+
+  /**
+   * @param WP_Package_Manager $wppm
+   */
+  function execute( $wppm ) {
+    $wppm->fail( 'Help comes to those who help themselves.' );
   }
 }

@@ -1,9 +1,12 @@
 <?php
 class WPPM_Show_Command extends WPPM_Command {
-  function execute() {
-    $config = WP_Package_Manager::parse_config();
+  /**
+   * @param WP_Package_Manager $wppm
+   */
+  function execute( $wppm ) {
+    $config = $wppm->parse_config();
     $config->show();
-    $package = WP_Package_Manager::parse_package();
+    $package = $wppm->parse_package();
     $package->show();
   }
 }

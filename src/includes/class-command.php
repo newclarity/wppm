@@ -10,9 +10,13 @@ abstract class WPPM_Command {
     $commands = array_flip( WP_Package_Manager::$VALID_COMMANDS );
     return $commands[get_class( $this )];
   }
-  function execute() {
+
+  /**
+   * @param WP_Package_Manager $wppm
+   */
+  function execute( $wppm ) {
     $message = sprintf( 'The %s class has not implemented an execute() method.', get_class( $this ) );
-    WP_Package_Manager::fail( $message );
+    $wppm->fail( $message );
   }
   function add_error( $error ) {
     $this->errors[] = "\tERROR: {$error}\n";
@@ -25,7 +29,8 @@ abstract class WPPM_Command {
   }
   function show( $message = false ) {
     if ( ! $message )
-      $message = implode( "\n\t", $this->messages );
+      $message = $this->messages;
+    $message = implode( "\n", $message );
     fwrite( STDOUT, "{$message}\n" );
   }
 }
