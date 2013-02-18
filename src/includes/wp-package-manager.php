@@ -8,7 +8,7 @@ final class WP_Package_Manager {
   private $VALID_COMMANDS = array(
     'help'    => 'WPPM_Help_Command',
     'show'    => 'WPPM_Show_Command',
-    'prep'    => 'WPPM_Prep_Command',
+    'prepare' => 'WPPM_Prepare_Command',
     'publish' => 'WPPM_Publish_Command',
     'status'  => 'WPPM_Status_Command',
   );
