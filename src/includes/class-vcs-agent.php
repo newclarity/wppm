@@ -1,8 +1,12 @@
 <?php
-
+/**
+ * @method clone( $repository_url, $local_path )
+ */
 abstract class Vcs_Agent {
   protected $agent_type;
   protected $executable;
+  var $username;
+  var $password;
   /**
    * Instantiate the agent
    *
@@ -35,6 +39,8 @@ abstract class Vcs_Agent {
     return $this->_exec( 'status' );
   }
 
+  function export( $repository_url, $local_path ) { return $this->_not_implemented( 'export' ); }
+  protected function _clone( $repository_url, $local_path ) { return $this->_not_implemented( 'clone' ); }
   function out() { return $this->_not_implemented( 'out' ); }
   function clean() { return $this->_not_implemented( 'clean' ); }
   function pull( $remote, $branch ) { return $this->_not_implemented( 'pull' ); }
@@ -44,6 +50,10 @@ abstract class Vcs_Agent {
   function is_clean() { return false; }
   private function _not_implemented( $method ) {
     return array( get_class( $this ) . "->{$method}() not implemented." );
+  }
+  function __call( $method, $args ) {
+    if ( 'clone' == $method )
+      return call_user_func_array( array( $this, '_clone' ), $args );
   }
 }
 

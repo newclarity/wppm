@@ -9,6 +9,18 @@ class Git_Agent extends Vcs_Agent {
     parent::__construct( 'git', $args );
   }
 
+  function export( $repository_url, $local_path ) {
+    $output = $this->_clone( $repository_url, $local_path );
+    File_Ops::kill_dir( "{$local_path}/.git" );
+    return $output;
+  }
+
+  protected function _clone( $repository_url, $local_path ) {
+    $repository_url = preg_replace( '#^https?://(.*)(.git)?$#', 'git://$1.git', $repository_url );
+    $command = "clone {$repository_url} {$local_path}";
+    return $this->_exec( $command );
+  }
+
   /**
    * Cleans out all uncommitted changes from the local repository.
    *
@@ -65,8 +77,6 @@ class Git_Agent extends Vcs_Agent {
    */
   function tags() {
     return $this->_exec( 'tag -l' );
-
-    return $output;
   }
 
 }

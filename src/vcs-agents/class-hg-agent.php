@@ -9,6 +9,18 @@ class Hg_Agent extends Vcs_Agent {
     parent::__construct( 'hg', $args );
   }
 
+  function export( $repository_url, $local_path ) {
+    $output = $this->_clone( $repository_url, $local_path );
+    File_Ops::kill_dir( "{$local_path}/.hg" );
+    return $output;
+  }
+
+  protected function _clone( $repository_url, $local_path ) {
+    $repository_url = preg_replace( '#^(https://)(.*)$#', "$1{$this->username}@$2", $repository_url );
+    $command = "clone {$repository_url} {$local_path}";
+    return $this->_exec( $command );
+  }
+
   /**
    * Cleans out all uncommitted changes from the local repository.
    *
