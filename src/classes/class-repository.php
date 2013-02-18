@@ -11,6 +11,10 @@ class WPPM_Repository extends WPPM_Container {
   var $type;
   var $account;
   var $repository;
+
+  var $singular_type_name;
+  var $plural_type_name;
+
   function __construct( $id, $value, $package = false ) {
     parent::__construct( $id, $value, $package );
     $this->ID = preg_replace( '#^https?://(.*)#', '$1', $this->url );
@@ -39,6 +43,23 @@ class WPPM_Repository extends WPPM_Container {
         break;
       case 'wordpress.org':
         $this->vcs = 'svn';
+        break;
+    }
+
+    switch ( $this->type ) {
+      case 'plugin':
+        $this->singular_type_name = 'Plugin';
+        $this->plural_type_name =   'Plugins';
+        break;
+
+      case 'theme':
+        $this->singular_type_name = 'Theme';
+        $this->plural_type_name =   'Themes';
+        break;
+
+      case 'library':
+        $this->singular_type_name = 'Library';
+        $this->plural_type_name =   'Libraries';
         break;
     }
 
