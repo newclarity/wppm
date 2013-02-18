@@ -30,8 +30,10 @@ abstract class WPPM_Command {
   function show( $message = false ) {
     if ( ! $message )
       $message = $this->messages;
-    $message = implode( "\n", $message );
-    fwrite( STDOUT, "{$message}\n" );
+    if ( count( $message ) ) {
+      $message = implode( "\n", $message );
+      fwrite( STDOUT, "{$message}\n" );
+    }
   }
 }
 
