@@ -7,4 +7,8 @@ class WPPM_Config extends WPPM_Container {
   );
   var $hosts = array();
   var $executables = array();
+  function __construct( $config_filepath, $config ) {
+    $this->FILEPATH = $config_filepath;
+    parent::__construct( 'config', $config, $this );
+  }
 }
