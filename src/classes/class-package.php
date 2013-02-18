@@ -61,13 +61,13 @@ class WPPM_Package extends WPPM_Container {
       case 'plugin':
         $this->singular_type_name = 'Plugin';
         $this->plural_type_name =   'Plugins';
-        $this->$wordpress_svn_url = "http://plugins.svn.wordpress.org/{$this->slug}/";
+        $this->wordpress_svn_url = "http://plugins.svn.wordpress.org/{$this->slug}/";
         break;
 
       case 'theme':
         $this->singular_type_name = 'Theme';
         $this->plural_type_name =   'Themes';
-        $this->$wordpress_svn_url = "http://themes.svn.wordpress.org/{$this->slug}/";
+        $this->wordpress_svn_url = "http://themes.svn.wordpress.org/{$this->slug}/";
         break;
 
       case 'library':
