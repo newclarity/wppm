@@ -13,15 +13,46 @@ class Svn_Agent extends Vcs_Agent {
     return $this->_exec( "propset svn:ignore \"{$ignore_files}\" \"{$local_path}/trunk\"" );
   }
 
-  function export( $repository_url, $local_path ) {
-    $output = $this->_clone( $repository_url, $local_path );
-    File_Ops::recursive_kill_dir( "{$local_path}/.svn" );
-    return $output;
+  function export( $repository, $local_path ) {
+    return $this->_exec( "export {$repository} {$local_path}" );
+  }
+
+  protected function _get_auth() {
+    return " --username {$this->username} --password {$this->password}";
   }
 
   protected function _clone( $repository_url, $local_path ) {
-    $command = "checkout {$repository_url} {$local_path} --username {$this->username} --password {$this->password}";
-    return $this->_exec( $command );
+    return $this->_exec( "checkout {$repository_url} {$local_path}" . $this->_get_auth() );
+  }
+
+  function remove( $repository_dir, $files, $switches = false ) {
+    $this->_pushdir( $repository_dir );
+    $output = $this->_exec( "remove {$files} {$switches}" );
+    $this->_popdir();
+    return $output;
+  }
+
+  function add( $repository_dir, $files, $switches = false ) {
+    $this->_pushdir( $repository_dir );
+    $output = $this->_exec( "add {$files} {$switches}" );
+    $this->_popdir();
+    return $output;
+  }
+
+  function tag( $repository_dir, $tag ) {
+    $this->_pushdir( $repository_dir );
+    $output = $this->commit( $repository_dir, "Adding version {$tag}" );
+    $output += $this->_exec( "cp trunk tags/{$tag}" );
+    $output += $this->commit( $repository_dir, "Tagging version {$tag}" );
+    $this->_popdir();
+    return $output;
+  }
+
+  function commit( $repository_dir, $message ) {
+    $this->_pushdir( $repository_dir );
+    $output = $this->_exec( "commit -m \"{$message}\"" . $this->_get_auth() );
+    $this->_popdir();
+    return $output;
   }
 
   /**

@@ -3,8 +3,9 @@
  * @method clone( $repository_url, $local_path )
  */
 abstract class Vcs_Agent {
-  protected $agent_type;
-  protected $executable;
+  private $_dir_stack = array();
+  var $agent_type;
+  var $executable;
   var $username;
   var $password;
   /**
@@ -39,6 +40,10 @@ abstract class Vcs_Agent {
     return $this->_exec( 'status' );
   }
 
+  function remove( $repository_dir, $files, $switches ) { return $this->_not_implemented( 'remove' ); }
+  function add( $repository_dir, $files, $switches ) { return $this->_not_implemented( 'add' ); }
+  function tag( $repository_dir, $tag ) { return $this->_not_implemented( 'tag' ); }
+  function commit( $repository_dir, $message ) { return $this->_not_implemented( 'commit' ); }
   function export( $repository_url, $local_path ) { return $this->_not_implemented( 'export' ); }
   protected function _clone( $repository_url, $local_path ) { return $this->_not_implemented( 'clone' ); }
   function out() { return $this->_not_implemented( 'out' ); }
@@ -55,5 +60,15 @@ abstract class Vcs_Agent {
     if ( 'clone' == $method )
       return call_user_func_array( array( $this, '_clone' ), $args );
   }
+
+  protected function _pushdir( $new_dir ) {
+    array_push( $this->_dir_stack, getcwd() );
+    chdir( $new_dir );
+  }
+
+  protected function _popdir() {
+    chdir( array_pop( $this->_dir_stack ) );
+  }
+
 }
 
