@@ -23,14 +23,18 @@ class WPPM_Package extends WPPM_Container {
   var $author;
   var $contributors = array();
   var $tags;
+  /**
+   * @var WPPM_Repository
+   */
   var $source;
   var $dependencies = array();
   var $bundled_dependencies = array();
+  var $delete_files = array();
   var $url;
 
   var $singular_type_name;
   var $plural_type_name;
-
+  var $wordpress_svn_url;
 
   function __construct( $package_filepath, $package ) {
     $this->FILEPATH = $package_filepath;
@@ -57,11 +61,13 @@ class WPPM_Package extends WPPM_Container {
       case 'plugin':
         $this->singular_type_name = 'Plugin';
         $this->plural_type_name =   'Plugins';
+        $this->$wordpress_svn_url = "http://plugins.svn.wordpress.org/{$this->slug}/";
         break;
 
       case 'theme':
         $this->singular_type_name = 'Theme';
         $this->plural_type_name =   'Themes';
+        $this->$wordpress_svn_url = "http://themes.svn.wordpress.org/{$this->slug}/";
         break;
 
       case 'library':
