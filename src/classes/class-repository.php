@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @property WPPM_Package $ROOT
+ */
 class WPPM_Repository extends WPPM_Container {
 
   var $vcs;
@@ -33,6 +35,7 @@ class WPPM_Repository extends WPPM_Container {
         break;
       case 'bitbucket.org':
         $this->vcs = is_null( $this->vcs ) ? 'hg' : $this->vcs;
+        $this->url = preg_replace( '#^http://(.*)$#', 'https://$1', $this->url );
         break;
       case 'wordpress.org':
         $this->vcs = 'svn';
@@ -42,6 +45,7 @@ class WPPM_Repository extends WPPM_Container {
     $this->ID = "{$this->domain}/{$this->account}/{$this->repository}";
 
   }
+
   protected function _fixup() {
     parent::_fixup();
     if ( is_null( $this->type ) )
