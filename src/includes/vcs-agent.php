@@ -41,8 +41,8 @@ abstract class Vcs_Agent {
   }
 
   function push_version( $repository_dir, $version ) { return $this->_not_implemented( 'push_version' ); }
-  function remove( $repository_dir, $files, $switches ) { return $this->_not_implemented( 'remove' ); }
-  function add( $repository_dir, $files, $switches ) { return $this->_not_implemented( 'add' ); }
+  function remove( $repository_dir, $files, $switches = false ) { return $this->_not_implemented( 'remove' ); }
+  function add( $repository_dir, $files, $switches = false ) { return $this->_not_implemented( 'add' ); }
   function tag( $repository_dir, $tag ) { return $this->_not_implemented( 'tag' ); }
   function commit( $repository_dir, $message ) { return $this->_not_implemented( 'commit' ); }
   function export( $repository_url, $local_path ) { return $this->_not_implemented( 'export' ); }
