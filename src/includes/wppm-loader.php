@@ -4,10 +4,10 @@
  * Load Root and Base Classes. We'll always need them.
  */
 require ( __DIR__ . "/wp-package-manager.php" );
-require ( __DIR__ . "/class-container.php" );
-require ( __DIR__ . "/class-command.php" );
+require ( __DIR__ . "/wppm-container.php" );
+require ( __DIR__ . "/wppm-command.php" );
 require ( __DIR__ . "/vcs-interface.php" );
-require ( __DIR__ . "/class-vcs-agent.php" );
+require ( __DIR__ . "/vcs-agent.php" );
 
 spl_autoload_register( 'wppm_class_autoloader' );
 
