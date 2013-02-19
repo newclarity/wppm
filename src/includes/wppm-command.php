@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * SCLITP - Simple Command Line Interface Tool via PHP (pronounced like "Split-Pea')
+ */
 abstract class WPPM_Command {
   var $command;
   var $errors = array();
