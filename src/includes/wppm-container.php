@@ -4,7 +4,7 @@
  *
  * All base class properties UPPERCASE to avoid conflict as JSON conventions never(?) use ALL UPPERCASE.
  *
- * @todo Refactor out of wppm and into "Typed JSON Loader for PHP"
+ * @todo Refactor out of WPPM and into "TCLP - Typed Config Loader for PHP"
  *
  */
 abstract class WPPM_Container {
