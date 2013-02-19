@@ -76,12 +76,15 @@ class WPPM_Prepare_Command extends WPPM_Command {
 
     echo "\nMerging Source Files with Existing...\n";
     $this->show( $this->_merge_to_svn( $source_dir, $trunk_dir ) );
+    $svn_agent->add( $prepared_dir, $trunk_dir );
 
     /**
      * Get svn to recognize all the new files.
      */
-    echo "\nMoving /trunk/assets/*.* up to /assets/*.*...\n";
+    echo "\nMoving trunk/assets/ up to assets/...\n";
     $this->show( File_Ops::move_dir( "{$trunk_dir}/assets", "{$prepared_dir}/assets" ) );
+
+    echo "\Removing trunk/assets/...\n";
     $this->show( $svn_agent->remove( $prepared_dir, "trunk/assets", "--force" ) );
 
     /**
@@ -135,7 +138,7 @@ class WPPM_Prepare_Command extends WPPM_Command {
   		 * Check to see if this is a sudir
   		 */
   		if ( is_array( $source_file ) ) {
-        $messages += $this->_merge_to_svn( "{$source_dir}/{$source_filename}",	"{$prepared_dir}/{$source_filename}" );
+        $messages = array_merge( $messages, $this->_merge_to_svn( "{$source_dir}/{$source_filename}",	"{$prepared_dir}/{$source_filename}" ) );
   		} else { // is file
   			$prepared_filename = "{$prepared_dir}/{$source_filename}";
   			$source_filename = "{$source_dir}/{$source_filename}";
@@ -181,7 +184,7 @@ class WPPM_Prepare_Command extends WPPM_Command {
   		$directories = array();
   		foreach( array_keys( $prepared_files ) as $prepared_filename ) {
   			$filename_to_remove = "{$prepared_dir}/{$prepared_filename}";
-        $messages[] =  shell_exec( "svn rm --force {$filename_to_remove}" );
+        $messages[] = shell_exec( "svn rm --force {$filename_to_remove}" );
   			if ( is_dir( $filename_to_remove ) ) {
   				$directories[] = $filename_to_remove;
   			} else if ( file_exists( $filename_to_remove ) ) {
@@ -189,7 +192,7 @@ class WPPM_Prepare_Command extends WPPM_Command {
   			}
   		}
   		foreach ( $directories as $directory ) {
-        $messages[] =  shell_exec( "svn rm --force {$filename_to_remove}" );
+        $messages[] = shell_exec( "svn rm --force {$filename_to_remove}" );
         File_Ops::remove_directory( $directory );
   		}
 
