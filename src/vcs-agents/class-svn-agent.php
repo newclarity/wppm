@@ -39,21 +39,43 @@ class Svn_Agent extends Vcs_Agent {
     return $output;
   }
 
+  function copy( $repository_dir, $from_dir, $to_dir ) {
+    $this->_pushdir( $repository_dir );
+    $output = $this->_exec( "copy {$from_dir} {$to_dir}" );
+    $this->_popdir();
+    return $output;
+  }
+
   function push_version( $repository_dir, $version ) {
+    $output = array();
     $this->_pushdir( $repository_dir );
     $output = $this->commit( $repository_dir, "Adding version {$version}" );
-    $output = array_merge( $output,  $this->tag( $repository_dir, $version, "Tagging version {$version}" ) );
+    $output = array_merge( $output, $this->tag( $repository_dir, $version, "Tagging version {$version}" ) );
     $this->_popdir();
     return $output;
   }
 
   function tag( $repository_dir, $tag, $message ) {
+    $output = array();
     $this->_pushdir( $repository_dir );
+    $tags_dir = "{$repository_dir}/tags";
     $tag = "tags/{$tag}";
-    $output = array_merge( $output,  File_Ops::ensure_dir( "{$repository_dir}/{$tag}" ) );
-    $output = array_merge( $output,  $this->_exec( "cp -rf trunk {$tag}" ) );
-    $output = array_merge( $output,  $this->add( $repository_dir, $tag ) );
-    $output = array_merge( $output,  $this->commit( $repository_dir, $message ) );
+    $tag_dir = "{$repository_dir}/{$tag}";
+    if ( ! is_dir( $tags_dir ) ) {
+      /**
+       * In case we are working with a repo that does not already have a tags dir
+       * This would not be the case for WordPress.org plugins and themes.
+       */
+      $output = array_merge( $output, File_Ops::ensure_dir( $tags_dir ) );
+      $output = array_merge( $output, $this->add( $repository_dir, 'tags' ) );
+    }
+    if ( is_dir( $tag_dir ) ) {
+      $output = array_merge( $output, $this->remove( $repository_dir, $tag_dir ) );
+      $output = array_merge( $output, File_Ops::kill_dir( $tag_dir ) );
+    }
+    $output = array_merge( $output, File_Ops::ensure_dir( $tags_dir ) );
+    $output = array_merge( $output, $this->copy( $repository_dir, 'trunk/', $tag ) );
+    $output = array_merge( $output, $this->commit( $repository_dir, $message ) );
     $this->_popdir();
     return $output;
   }
