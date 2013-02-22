@@ -11,6 +11,8 @@ final class WP_Package_Manager {
     'prepare' => 'WPPM_Prepare_Command',
     'publish' => 'WPPM_Publish_Command',
     'status'  => 'WPPM_Status_Command',
+    'generate-readme' => 'WPPM_Generate_Readme_Command',
+    'generate-header' => 'WPPM_Generate_Header_Command',
   );
   private $_package;
   private $_config;
@@ -35,6 +37,8 @@ final class WP_Package_Manager {
     $command_class = $this->VALID_COMMANDS[$command];
     require( dirname( __DIR__ ) . "/commands/command-{$command}.php" );
     $command = new $command_class;
+    $command->logger = new WPPM_Logger();
+    $command->wppm = $this;
     return $command;
   }
 
