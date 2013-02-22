@@ -35,6 +35,11 @@ abstract class WPPM_Container {
   var $UNUSED;
 
   /**
+   * @var array
+   */
+  var $LOGGER;
+
+  /**
    * @param string $id
    * @param bool|object|mixed $vars
    * @param bool|WPPM_Container $root
@@ -45,6 +50,7 @@ abstract class WPPM_Container {
       $root = $this;
     $this->ID = $id;
     $this->ROOT = $root;
+    $this->LOGGER = new WPPM_Logger();
     if ( ! is_null( $vars ) ) {
       if ( is_object( $vars ) )
         $vars = (array) $vars;

@@ -3,9 +3,20 @@
  * SCLITP - Simple Command Line Interface Tool via PHP (pronounced like "Split-Pea')
  */
 abstract class WPPM_Command {
+
+  /**
+   * @var WP_Package_Manager
+   */
+  var $wppm;
   var $command;
   var $errors = array();
   var $messages = array();
+
+  /**
+   * @var WPPM_Logger
+   */
+  var $logger;
+
   function __construct() {
   }
   function get_command_name() {
