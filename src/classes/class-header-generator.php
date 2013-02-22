@@ -94,7 +94,7 @@ class WPPM_Header_Generator {
  * Author URI: {$this->author_uri}
  * Text Domain: {$this->text_domain}
  * License: {$this->license}
- * License: {$this->license_uri}
+ * License URI: {$this->license_uri}
  *
  * Copyright {$this->copyright}
  *
