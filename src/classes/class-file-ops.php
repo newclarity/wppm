@@ -92,6 +92,19 @@ class File_Ops {
   }
 
   /**
+   * @param string $from_dir
+   * @param string $to_dir
+   *
+   * @return array
+   */
+  static function copy_dir( $from_dir, $to_dir ) {
+    $from_dir = rtrim( $from_dir, '/' );
+    $to_dir = rtrim( $to_dir, '/' );
+    exec( "cp -rf {$from_dir}/ {$to_dir}", $output );
+    return $output;
+  }
+
+  /**
    * @param string $filepath
    * @param string $new_dir
    *
