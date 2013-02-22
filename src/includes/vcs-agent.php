@@ -27,6 +27,7 @@ abstract class Vcs_Agent {
   }
 
   protected function _exec( $command ) {
+    echo "\nExectuting command {$this->agent_type} {$command}\n\n";
     exec( "{$this->executable} {$command}", $output );
     return $output;
   }
