@@ -8,7 +8,7 @@ class WPPM_Contributor extends WPPM_Container {
   var $type;
   var $name;
   var $email;
-  var $homepage;
+  var $url;
   var $links = array();
   function __construct( $type, $value, $config ) {
     parent::__construct( $type, $value, $config );
@@ -23,42 +23,42 @@ class WPPM_Contributor extends WPPM_Container {
       $this->name = $value;
     }
     $this->type = $type;
-    if ( is_null( $this->homepage ) ) {
+    if ( is_null( $this->url ) ) {
       if ( isset( $this->links['homepage'] ) )
         /**
          * Homepage not set, but is set in links.
          */
-        $this->homepage = $this->links['homepage']->url;
+        $this->url = $this->links['homepage']->url;
       else if ( count( $this->links ) ) {
         /**
          * Homepage not set, get the first link in the links array.
          */
-        $this->homepage = reset( $this->links )->url;
+        $this->url = reset( $this->links )->url;
       }
-    } else if ( ! preg_match( '#^https?://#', $this->homepage ) ) {
+    } else if ( ! preg_match( '#^https?://#', $this->url ) ) {
       /**
        * Not a URL but a key into the links array.
        */
-      $this->homepage = $this->links[$this->homepage]->url;
+      $this->url = $this->links[$this->homepage]->url;
     }
   }
   function _fixup() {
     if ( 'author' == $this->ID ) {
 
-      if ( is_null( $this->homepage ) && isset( $this->ROOT->UNUSED['author_homepage'] ) ) {
-        $this->homepage = $this->ROOT->UNUSED['author_homepage'];
+      if ( is_null( $this->url ) && isset( $this->ROOT->UNUSED['author_homepage'] ) ) {
+        $this->url = $this->ROOT->UNUSED['author_homepage'];
         unset( $this->ROOT->UNUSED['author_homepage'] );
       }
 
       $found = false;
       foreach( $this->links as $link_id => $link ) {
-        if ( $link->url == $this->homepage ) {
+        if ( $link->url == $this->url ) {
           $found = true;
           break;
         }
       }
       if ( ! $found )
-        $this->links['homepage'] = $this->homepage;
+        $this->links['homepage'] = $this->url;
 
       return;
     }
