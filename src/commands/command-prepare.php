@@ -84,7 +84,7 @@ class WPPM_Prepare_Command extends WPPM_Command {
     echo "\nMoving trunk/assets/ up to assets/...\n";
     $this->show( File_Ops::move_dir( "{$trunk_dir}/assets", "{$prepared_dir}/assets" ) );
 
-    echo "\Removing trunk/assets/...\n";
+    echo "\nRemoving trunk/assets/...\n";
     $this->show( $svn_agent->remove( $prepared_dir, "trunk/assets", "--force" ) );
 
     /**
