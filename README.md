@@ -1,3 +1,7 @@
+#NOTICE:
+
+This was a great research project, but we have abandoned it.  All our current effort is being directed to [**WPLib CLI**](http://github.com/wplib/wplib-cli).
+
 wppm
 ====
 
